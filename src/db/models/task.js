@@ -16,6 +16,10 @@ const Task = mongoose.model('Task', {
         type: String,
         trim: true
     },
+    project: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Project'
+    },
     startDate: {
         type: Date,
         default: Date.now
@@ -24,7 +28,6 @@ const Task = mongoose.model('Task', {
         type: Date,
         default: Date.now
     }
-
     // Add lists of sub task associated with this task
 })
 

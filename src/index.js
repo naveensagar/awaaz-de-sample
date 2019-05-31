@@ -30,11 +30,15 @@ app.post('/projects', async (req, res) => {
     }
 })
 
-app.post('/tasks', async (req, res) => {
+app.post('/projects/:id/tasks', async (req, res) => {
+    req.body["project"] = req.params.id
     const task = new Task(req.body)
 
     try {
         await task.save()
+        const project = await Project.findById(req.params.id)
+        project.tasks.push(task)
+        await project.save()
         res.status(201).send(task)
     } catch (e) {
         res.status(400).send(e)

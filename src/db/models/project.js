@@ -20,7 +20,13 @@ const Project = mongoose.model('Project', {
     endDate: {
         type: Date,
         default: Date.now
-    }
+    },
+    tasks: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Task"
+        }
+    ]
 
     // Add lists of tasks associted with project
 })
