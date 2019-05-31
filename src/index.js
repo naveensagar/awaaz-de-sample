@@ -11,21 +11,35 @@ app.use(express.json())
 // ====== ROUTES ==========
 
 app.get('/', (req, res) => {
-    res.send('will redirect to projects page')
+    res.redirect('/projects')
 })
 
-// SHOW ROUTE
+// SHOW ALL THE PROJECTS
 app.get('/projects', async (req, res) => {
 
     try {
-        const projects = await Project.find({}).populate('tasks')
-        res.status(200).send(projects)
+        const projects = await Project.find({})
+        if (!projects) {
+            return res.status(404).send()
+        }
+        res.send(projects)
     } catch (e) {
         res.status(500).send()
     }
 })
 
-
+// SHOW THE PROJECT WITH GIVEN ID
+app.get('/projects/:id', async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.id).populate('tasks')
+        if (!project) {
+            return res.status(404).send()
+        }
+        res.send(project)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
 
 // CREATE ROUTE
 app.post('/projects', async (req, res) => {
