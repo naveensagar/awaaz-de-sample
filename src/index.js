@@ -2,11 +2,16 @@ const express = require('express')
 require('./db/mongoose')
 const Project = require('./db/models/project')
 const Task = require('./db/models/task')
+
+const path = require('path')
 const app = express()
 
 const port = process.env.PORT || 3000
+app.set('views', path.join(__dirname, '/views'));
+
 
 app.use(express.json())
+app.set("view engine", "ejs");
 
 // ====== ROUTES ==========
 
@@ -22,7 +27,7 @@ app.get('/projects', async (req, res) => {
         if (!projects) {
             return res.status(404).send()
         }
-        res.send(projects)
+        res.render('projects/index', { projects })
     } catch (e) {
         res.status(500).send()
     }
