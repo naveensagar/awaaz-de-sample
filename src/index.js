@@ -41,6 +41,19 @@ app.get('/projects/:id', async (req, res) => {
     }
 })
 
+// SHOW THE TASK WITH GIVEN ID
+app.get('/projects/:id/tasks/:task_id', async (req, res) => {
+    try {
+        const task = await Task.findById(req.params.task_id)
+        if (!task) {
+            return res.status(404).send()
+        }
+        res.send(task)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 // CREATE ROUTE
 app.post('/projects', async (req, res) => {
     const project = new Project(req.body)
