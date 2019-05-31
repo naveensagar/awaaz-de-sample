@@ -22,7 +22,7 @@ const Project = mongoose.model('Project', {
         default: Date.now
     }
 
-    // Add date
+    // Add lists of tasks associted with project
 })
 
 module.exports = Project

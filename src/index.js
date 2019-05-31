@@ -1,6 +1,7 @@
 const express = require('express')
 require('./db/mongoose')
 const Project = require('./db/models/project')
+const Task = require('./db/models/task')
 const app = express()
 
 const port = process.env.PORT || 3000
@@ -28,6 +29,18 @@ app.post('/projects', async (req, res) => {
         res.status(400).send(e)
     }
 })
+
+app.post('/tasks', async (req, res) => {
+    const task = new Task(req.body)
+
+    try {
+        await task.save()
+        res.status(201).send(task)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
 
 
 app.listen(port, () => {
