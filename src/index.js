@@ -15,9 +15,17 @@ app.get('/', (req, res) => {
 })
 
 // SHOW ROUTE
-app.get('/projects', (req, res) => {
-    res.send('will render projects page')
+app.get('/projects', async (req, res) => {
+
+    try {
+        const projects = await Project.find({}).populate('tasks')
+        res.status(200).send(projects)
+    } catch (e) {
+        res.status(500).send()
+    }
 })
+
+
 
 // CREATE ROUTE
 app.post('/projects', async (req, res) => {
