@@ -1,16 +1,20 @@
 <% include ../partials/header %>
 
-<h1>YOUR PROJECTS</h1>
+<h1 class="text-center">YOUR PROJECTS</h1>
 
-<% projects.forEach((project) => { %>
-    <div>
-        <h2> <a href="/projects/<%=project._id%>"><%= project.name %></a></h2>
-        <p><%= project.description %></p>
-        <!-- use form to send a put request-->
-        <a href="/projects/<%=project._id%>/edit">Edit</a>
-        <!-- use forn to send a delete request-->
-        <a href="/projects/<%=project._id%>/delete">Delete</a>
-    </div>
-<% }) %>
+<div class="container">
+        <% projects.forEach((project) => { %>
+            <div class="card">  
+                <div class="card-body">
+                    <h5 class="card-title"> <a href="/projects/<%= project._id %>"><%= project.name %></a></h5>
+                    <p class="card-text"><%= project.description%></p>
+                    <!-- use form to send a put request-->
+                    <a href="/projects/<%=project._id%>/edit" class="btn btn-primary">Edit</a>
+                    <!-- use forn to send a delete request-->
+                    <a href="/projects/<%=project._id%>/delete" class="btn btn-primary">Delete</a>
+                </div>
+            </div>
+        <% }) %>        
+</div>
 
 <% include ../partials/footer%>
