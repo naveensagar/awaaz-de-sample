@@ -12,12 +12,15 @@ const app = express()
 const port = process.env.PORT || 3000
 app.set('views', path.join(__dirname, '../views'));
 
+const publicDirectoryPath = path.join(__dirname, '../public')
 
 app.use(express.json())
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
+// Setup static directory to serve
+app.use(express.static(publicDirectoryPath))
 // ====== ROUTES ==========
 
 app.get('/', (req, res) => {
