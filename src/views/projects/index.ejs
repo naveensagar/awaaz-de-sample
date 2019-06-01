@@ -1,20 +1,30 @@
 <% include ../partials/header %>
 
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Awaaz.De Programming Challenge</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <a class="btn btn-primary btn-lg" href="/projects/new" role="button">Add new Project</a>
+    </div>
+</div>
+
 <h1 class="text-center">YOUR PROJECTS</h1>
 
 <div class="container">
-        <% projects.forEach((project) => { %>
-            <div class="card">  
-                <div class="card-body">
-                    <h5 class="card-title"> <a href="/projects/<%= project._id %>"><%= project.name %></a></h5>
-                    <p class="card-text"><%= project.description%></p>
-                    <!-- use form to send a put request-->
-                    <a href="/projects/<%=project._id%>/edit" class="btn btn-primary">Edit</a>
-                    <!-- use forn to send a delete request-->
-                    <a href="/projects/<%=project._id%>/delete" class="btn btn-primary">Delete</a>
-                </div>
+    <% projects.forEach((project) => { %>
+        <div class="card">  
+            <div class="card-body">
+                <h5 class="card-title"> <a href="/projects/<%= project._id %>"><%= project.name %></a></h5>
+                <p class="card-text"><%= project.description%></p>
+                <!-- use form to send a put request-->
+                <a href="/projects/<%=project._id%>/edit" class="btn btn-primary">Edit</a>
+                <!-- use forn to send a delete request-->
+                <form action="/projects/<%= project._id%>?_method=DELETE" method="post">
+                    <button class="btn btn-primary">Delete</button>
+                </form>
             </div>
+        </div>
         <% }) %>        
-</div>
-
-<% include ../partials/footer%>
+    </div>
+    
+    <% include ../partials/footer%>

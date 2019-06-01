@@ -1,4 +1,7 @@
 const express = require('express')
+bodyParser     = require("body-parser"),
+methodOverride = require('method-override')
+
 require('./db/mongoose')
 const Project = require('./db/models/project')
 const Task = require('./db/models/task')
@@ -12,6 +15,8 @@ app.set('views', path.join(__dirname, '/views'));
 
 app.use(express.json())
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
 // ====== ROUTES ==========
 
@@ -31,6 +36,11 @@ app.get('/projects', async (req, res) => {
     } catch (e) {
         res.status(500).send()
     }
+})
+
+// ROUTE FOR CREATING A NEW PROJECT
+app.get('/projects/new', (req, res) => {
+    res.render('projects/new')
 })
 
 // SHOW THE PROJECT WITH GIVEN ID
@@ -61,10 +71,10 @@ app.get('/projects/:id/tasks/:task_id', async (req, res) => {
 
 // CREATE ROUTE
 app.post('/projects', async (req, res) => {
-    const project = new Project(req.body)
+    const project = new Project(req.body.project)
     try {
         await project.save()
-        res.status(201).send(project)
+        res.status(201).redirect('/projects')
     } catch (e) {
         res.status(400).send(e)
     }
@@ -85,6 +95,18 @@ app.post('/projects/:id/tasks', async (req, res) => {
     }
 })
 
+app.delete('/projects/:id', async (req, res) => {
+    try {
+        const project = await Project.findByIdAndDelete(req.params.id)
+
+        if (!project) {
+            return res.status(404).send()
+        }
+        res.redirect('/projects')
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
 
 
 app.listen(port, () => {
