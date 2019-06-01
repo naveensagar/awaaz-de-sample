@@ -108,6 +108,33 @@ app.delete('/projects/:id', async (req, res) => {
     }
 })
 
+app.get('/projects/:id/edit', async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.id)
+
+        if (!project) {
+            return res.status(404).send()            
+        }
+        res.render('projects/edit', { project })    
+    } catch (e) {
+        res.status(500).send(e)
+    }
+    
+})
+
+app.patch('/projects/:id', async (req, res) => {
+    try {
+        const project = await Project.findByIdAndUpdate(req.params.id, req.body.project, { new: true, runValidators: true })
+
+        if (!project) {
+            return res.status(404).send()
+        }
+
+        res.redirect('/projects')
+    } catch (e) {
+        res.status(500).send()
+    }
+}) 
 
 app.listen(port, () => {
     console.log('Server is up on port ' + port)
