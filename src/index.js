@@ -35,7 +35,7 @@ app.get('/projects', async (req, res) => {
         if (!projects) {
             return res.status(404).send()
         }
-        res.render('projects/index', { projects })
+        res.render('landing', { projects })
     } catch (e) {
         res.status(500).send()
     }
