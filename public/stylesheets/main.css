@@ -11,3 +11,11 @@ ul {
     margin-top: 25px;
     margin-bottom: 50px;
 }
+
+.jumbotron {
+    margin: 20px auto;
+}
+
+.card {
+    margin: 10px auto;
+}
