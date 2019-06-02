@@ -6,25 +6,28 @@
         <p class="lead">This is a simple project management application made with Node, Express, MongoDB, Mongoose by Naveen Sagar</p>
         <a class="btn btn-primary btn-lg" href="/projects/new" role="button">Add new Project</a>
     </div>
-
-<h1 class="project-head text-center">Current Projects</h1>
-
-
-    <% projects.forEach((project) => { %>
-        <div class="card">  
-            <div class="card-body">
-                <img class="project-avatar" src="<%= project.avatar %>" alt="project-avatar">
-                <h5 class="card-title"> <a href="/projects/<%= project._id %>"><%= project.name %></a></h5>
-                <p class="card-text"><%= project.description%></p>
-                <!-- use form to send a put request-->
-                <a href="/projects/<%=project._id%>/edit" class="btn btn-sm btn-warning">Edit</a>
-                <!-- use forn to send a delete request-->
-                <form class="delete-form" action="/projects/<%= project._id%>?_method=DELETE" method="post">
-                    <button class="btn btn-sm btn-danger">Delete</button>
-                </form>
-            </div>
-        </div>
-        <% }) %>        
-    </div>
     
-    <% include ./partials/footer%>
+    <h1 class="project-head text-center">Current Projects</h1>
+    
+    <div class="row text-center" >
+        <% projects.forEach((project) => { %>
+            <div class="col-md-4">
+                <div class="card project-card" style="width: 18rem;">
+                    <img class="card-img-top" src="<%= project.avatar %>" alt="Project avatar">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="/projects/<%= project._id %>"><%= project.name %></a></h5>
+                        <p class="card-text"><%= project.description %></p>
+                    </div>
+                    <div class="card-body">
+                        <a href="/projects/<%=project._id%>/edit" class="card-link btn btn-sm btn-warning">Edit</a>
+                        <form class="delete-form" action="/projects/<%= project._id%>?_method=DELETE" method="post">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <% }) %>      
+    </div>
+</div>
+
+<% include ./partials/footer%>
