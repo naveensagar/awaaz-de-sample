@@ -63,4 +63,17 @@ router.patch('/projects/:id/tasks/:task_id', async (req, res) => {
     }
 })
 
+router.delete('/projects/:id/tasks/:task_id', async (req, res) => {
+    try {
+        const task = await Task.findByIdAndDelete(req.params.task_id)
+        
+        if (!task) {
+            return res.status(404).send()
+        }
+        res.redirect('/projects/' + req.params.id)
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
+
 module.exports = router
