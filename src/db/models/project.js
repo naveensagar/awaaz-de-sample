@@ -10,7 +10,6 @@ const Project = mongoose.model('Project', {
     },
     avatar: {
         type: String,
-        default: "http://www.illuminationworksllc.com/wp-content/uploads/2017/04/ProjectManagement-1.jpg"
     },
     description: {
         type: String,

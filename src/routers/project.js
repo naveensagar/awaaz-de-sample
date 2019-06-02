@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     res.redirect('/projects')
 })
 
-// SHOW ALL THE PROJECTS
+// show all the projects
 router.get('/projects', async (req, res) => {
 
     try {
@@ -21,12 +21,12 @@ router.get('/projects', async (req, res) => {
     }
 })
 
-// ROUTE FOR CREATING A NEW PROJECT
+// show form to create a new route
 router.get('/projects/new', (req, res) => {
     res.render('projects/new')
 })
 
-// CREATE ROUTE
+// create a route
 router.post('/projects', async (req, res) => {
     const project = new Project(req.body.project)
     try {
@@ -37,7 +37,7 @@ router.post('/projects', async (req, res) => {
     }
 })
 
-// SHOW THE PROJECT WITH GIVEN ID
+// show a specific project with a given id
 router.get('/projects/:id', async (req, res) => {
     try {
         const project = await Project.findById(req.params.id).populate('tasks')
@@ -50,6 +50,7 @@ router.get('/projects/:id', async (req, res) => {
     }
 })
 
+// get the edit form for a project
 router.get('/projects/:id/edit', async (req, res) => {
     try {
         const project = await Project.findById(req.params.id)
@@ -63,6 +64,7 @@ router.get('/projects/:id/edit', async (req, res) => {
     }  
 })
 
+// update a form
 router.patch('/projects/:id', async (req, res) => {
     try {
         const project = await Project.findByIdAndUpdate(req.params.id, req.body.project, { new: true, runValidators: true })
@@ -77,6 +79,7 @@ router.patch('/projects/:id', async (req, res) => {
     }
 }) 
 
+// delete a form
 router.delete('/projects/:id', async (req, res) => {
     try {
         const project = await Project.findByIdAndDelete(req.params.id)

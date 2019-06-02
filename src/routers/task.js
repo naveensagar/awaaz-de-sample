@@ -4,8 +4,6 @@ const Project = require('../db/models/project')
 const router = express.Router();
 
 // SHOW THE TASK WITH GIVEN ID
-
-// ====== modify=======
 router.get('/projects/:id/tasks/:task_id', async (req, res) => {
     try {
         const task = await Task.findById(req.params.task_id)
@@ -18,7 +16,7 @@ router.get('/projects/:id/tasks/:task_id', async (req, res) => {
     }
 })
 
-
+// show the edit form for a task
 router.get('/projects/:id/tasks/:task_id/edit', async (req, res) => {
     try {
         const task = await Task.findById(req.params.task_id)
@@ -31,10 +29,12 @@ router.get('/projects/:id/tasks/:task_id/edit', async (req, res) => {
     }
 })
 
+// show a form for adding new task
 router.get('/projects/:id/tasks', (req, res) => {
     res.render('tasks/new', { project_id: req.params.id })
 })
 
+// add a new task 
 router.post('/projects/:id/tasks', async (req, res) => {
     req.body.task["project"] = req.params.id
     const task = new Task(req.body.task)
@@ -49,6 +49,7 @@ router.post('/projects/:id/tasks', async (req, res) => {
     }
 })
 
+// update a task
 router.patch('/projects/:id/tasks/:task_id', async (req, res) => {
     try {
         const task = await Task.findByIdAndUpdate(req.params.task_id, req.body.task, { new: true, runValidators: true})
@@ -63,6 +64,7 @@ router.patch('/projects/:id/tasks/:task_id', async (req, res) => {
     }
 })
 
+// delete a task
 router.delete('/projects/:id/tasks/:task_id', async (req, res) => {
     try {
         const task = await Task.findByIdAndDelete(req.params.task_id)
