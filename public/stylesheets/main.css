@@ -19,3 +19,7 @@ ul {
 .card {
     margin: 10px auto;
 }
+
+.project-avatar {
+    height: 100px;
+}
