@@ -19,15 +19,13 @@ const Task = mongoose.model('Task', {
     project: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Project'
+    },
+    startDate: {
+        type: String,
+    },
+    endDate: {
+        type: String,
     }
-    // startDate: {
-    //     type: Date,
-    //     default: Date.now
-    // },
-    // endDate: {
-    //     type: Date,
-    //     default: Date.now
-    // }
     // Add lists of sub task associated with this task
 })
 

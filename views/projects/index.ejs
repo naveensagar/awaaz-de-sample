@@ -23,10 +23,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <strong><%= task.name %></strong>
-                                <span class="pull-right">10 days ago</span>
-                                <p>
+                                <div>
                                     <%= task.description %>
-                                </p>
+                                </div>
+                                <div>
+                                    From <%= task.startDate %> to <%= task.endDate %>
+                                </div>
                                 <a href="/projects/<%= project._id %>/tasks/<%= task._id %>/edit" class="btn btn-sm btn-outline-warning">Edit</a>
                                 <!-- use forn to send a delete request-->
                                 <form class="delete-form" action="/projects/<%= project._id %>/tasks/<%= task._id %>?_method=DELETE" method="post">
