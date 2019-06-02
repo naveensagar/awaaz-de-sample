@@ -17,13 +17,10 @@ const Project = mongoose.model('Project', {
         required: true,
         trim: true
     },
-    startDate: {
-        type: Date,
-        default: Date.now
-    },
-    endDate: {
-        type: Date,
-        default: Date.now
+    duration: {
+        type: String,
+        trim: true,
+        required: true
     },
     tasks: [
         {
@@ -31,8 +28,6 @@ const Project = mongoose.model('Project', {
             ref: "Task"
         }
     ]
-
-    // Add lists of tasks associted with project
 })
 
 module.exports = Project

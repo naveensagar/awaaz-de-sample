@@ -18,10 +18,13 @@
                         <h5 class="card-title"><a href="/projects/<%= project._id %>"><%= project.name %></a></h5>
                         <p class="card-text"><%= project.description %></p>
                     </div>
+                    <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><%= project.duration %></li>
+                          </ul>
                     <div class="card-body">
-                        <a href="/projects/<%=project._id%>/edit" class="card-link btn btn-sm btn-warning">Edit</a>
-                        <form class="delete-form" action="/projects/<%= project._id%>?_method=DELETE" method="post">
-                            <button class="btn btn-sm btn-danger">Delete</button>
+                        <a href="/projects/<%=project._id%>/edit" class="card-link btn btn-sm btn-outline-warning">Edit</a>
+                        <form class="delete-form card-link" action="/projects/<%= project._id%>?_method=DELETE" method="post">
+                            <button class="btn btn-sm btn-outline-danger">Delete</button>
                         </form>
                     </div>
                 </div>
