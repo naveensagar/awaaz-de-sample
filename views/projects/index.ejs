@@ -1,23 +1,28 @@
 <% include ../partials/header %>
 
-<h1 class="text-center"> <%= project.name %></h1>
-<p> <%= project.description %></p>
-<a href="/projects/<%= project._id %>/tasks">Add a new task</a>
 <div class="container">
+    <h1 class="text-center"> <%= project.name %></h1>
+    <p> <%= project.description %></p>
+    <a href="/projects/<%= project._id %>/tasks">Add a new task</a>
+    
     <ul>
         <% project.tasks.forEach( (task) => { %>
             <li>
-                <span>Name: <%= task.name %></span>
-                <span>Description: <%= task.description %></span>
-                <!-- <span><%= task.startDate %></span>
-                <span><%= task.endDate %></span> -->
-                <a href="/projects/<%= project._id %>/tasks/<%= task._id %>/edit">Edit</a>
-                <form action="/projects/<%= project._id %>/tasks/<%= task._id %>?_method=DELETE" method="post">
-                    <button>Delete</button>
-                </form>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"> <%= task.name %> </h5>
+                        <p class="card-text"> <%= task.description %></p>
+                        <a href="/projects/<%= project._id %>/tasks/<%= task._id %>/edit" class="btn btn-sm btn-warning">Edit</a>
+                        <!-- use forn to send a delete request-->
+                        <form class="delete-form" action="/projects/<%= project._id %>/tasks/<%= task._id %>?_method=DELETE" method="post">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>    
             </li>    
-        <% }) %>
-     </ul>
+            <% }) %>
+        </ul>
+        
+        
     </div>
-    
     <% include ../partials/footer%>
