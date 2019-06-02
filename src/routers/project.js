@@ -44,7 +44,7 @@ router.get('/projects/:id', async (req, res) => {
         if (!project) {
             return res.status(404).send()
         }
-        res.send(project)
+        res.render('projects/index', { project })
     } catch (e) {
         res.status(500).send()
     }

@@ -1,9 +1,22 @@
 <% include ../partials/header %>
 
-<h1 class="text-center">YOUR ONE PROJECT</h1>
-
+<h1 class="text-center"> <%= project.name %></h1>
+<p> <%= project.description %></p>
 <div class="container">
-
+    <ul>
+        <% project.tasks.forEach( (task) => { %>
+            <li>
+                <span><%= task.name %></span>
+                <span><%= task.description %></span>
+                <span><%= task.startDate %></span>
+                <span><%= task.endDate %></span>
+                <a href="/projects/<%= project._id %>/tasks/<%= task._id %>/edit">Edit</a>
+                <form action="/projects/<%= project._id %>/tasks/<%= task._id %>?_method=DELETE" method="post">
+                    <button>Delete</button>
+                </form>
+            </li>    
+        <% }) %>
+     </ul>
     </div>
     
     <% include ../partials/footer%>

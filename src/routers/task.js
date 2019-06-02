@@ -16,6 +16,18 @@ router.get('/projects/:id/tasks/:task_id', async (req, res) => {
     }
 })
 
+router.get('/projects/:id/tasks/:task_id/edit', async (req, res) => {
+    try {
+        const task = await Task.findById(req.params.task_id)
+        if (!task) {
+            return res.status(404).send()
+        }
+        res.render('tasks/edit', { task })
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 router.post('/projects/:id/tasks', async (req, res) => {
     req.body["project"] = req.params.id
     const task = new Task(req.body)
@@ -28,6 +40,20 @@ router.post('/projects/:id/tasks', async (req, res) => {
         res.status(201).send(task)
     } catch (e) {
         res.status(400).send(e)
+    }
+})
+
+router.patch('/projects/:id/tasks/:task_id', async (req, res) => {
+    try {
+        const task = await Task.findByIdAndUpdate(req.params.task_id, req.body.task, { new: true, runValidators: true})
+
+        if (!task) {
+            return res.status(404).send()
+        }
+
+        res.redirect('/projects/' + req.params.id)
+    } catch (e) {
+        res.status(500).send(e)
     }
 })
 
