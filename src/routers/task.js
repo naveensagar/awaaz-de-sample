@@ -36,9 +36,8 @@ router.get('/projects/:id/tasks', (req, res) => {
 })
 
 router.post('/projects/:id/tasks', async (req, res) => {
-    req.body["project"] = req.params.id
+    req.body.task["project"] = req.params.id
     const task = new Task(req.body.task)
-
     try {
         await task.save()
         const project = await Project.findById(req.params.id)

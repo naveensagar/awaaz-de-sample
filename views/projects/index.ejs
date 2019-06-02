@@ -7,10 +7,10 @@
     <ul>
         <% project.tasks.forEach( (task) => { %>
             <li>
-                <span><%= task.name %></span>
-                <span><%= task.description %></span>
-                <span><%= task.startDate %></span>
-                <span><%= task.endDate %></span>
+                <span>Name: <%= task.name %></span>
+                <span>Description: <%= task.description %></span>
+                <!-- <span><%= task.startDate %></span>
+                <span><%= task.endDate %></span> -->
                 <a href="/projects/<%= project._id %>/tasks/<%= task._id %>/edit">Edit</a>
                 <form action="/projects/<%= project._id %>/tasks/<%= task._id %>?_method=DELETE" method="post">
                     <button>Delete</button>
