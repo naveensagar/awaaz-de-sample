@@ -4,6 +4,8 @@ const Project = require('../db/models/project')
 const router = express.Router();
 
 // SHOW THE TASK WITH GIVEN ID
+
+// ====== modify=======
 router.get('/projects/:id/tasks/:task_id', async (req, res) => {
     try {
         const task = await Task.findById(req.params.task_id)
@@ -15,6 +17,7 @@ router.get('/projects/:id/tasks/:task_id', async (req, res) => {
         res.status(500).send()
     }
 })
+
 
 router.get('/projects/:id/tasks/:task_id/edit', async (req, res) => {
     try {
@@ -28,16 +31,20 @@ router.get('/projects/:id/tasks/:task_id/edit', async (req, res) => {
     }
 })
 
+router.get('/projects/:id/tasks', (req, res) => {
+    res.render('tasks/new', { project_id: req.params.id })
+})
+
 router.post('/projects/:id/tasks', async (req, res) => {
     req.body["project"] = req.params.id
-    const task = new Task(req.body)
+    const task = new Task(req.body.task)
 
     try {
         await task.save()
         const project = await Project.findById(req.params.id)
         project.tasks.push(task)
         await project.save()
-        res.status(201).send(task)
+        res.redirect('/projects/' + req.params.id)
     } catch (e) {
         res.status(400).send(e)
     }

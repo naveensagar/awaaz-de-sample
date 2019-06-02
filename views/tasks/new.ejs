@@ -1,0 +1,23 @@
+<% include ../partials/header %>
+
+<div class="container">    
+    <h1 style="text-align:center; margin-bottom: 25px">Add a new task</h1>
+    <div style="width:50%; margin:0 auto">
+            <form action="/projects/<%= project_id %>/tasks" method="POST">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="task[name]" placeholder="Name">
+                </div>
+
+                <div class="form-group">
+                        <input class="form-control" type="text" name="task[description]" placeholder="Description">
+                    </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+            <a href="/projects/<%= project_id %>">Go Back</a>
+    </div>
+</div>
+
+<% include ../partials/footer %>
